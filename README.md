@@ -8,7 +8,9 @@
 
 - 📝 **Edit Grid Parent:** Chỉnh sửa dữ liệu trực tiếp trên lưới cấp cha.
 - 🌿 **Edit Grid Child:** Hỗ trợ mở rộng và chỉnh sửa lưới cấp con độc lập.
-- ⚙️ **Bộ hàm SDK mạnh mẽ:** Hỗ trợ đầy đủ các thao tác `setValue`, `setDisabled`, `setRequired`, `addOnChange`, `getValue`, `getValues`,`setFetchLookup` cho từng dòng.
+- ⚙️ **Bộ hàm SDK mạnh mẽ:
+  - ** Hỗ trợ đầy đủ các thao tác `setValue`, `setDisabled`, `setRequired`, `addOnChange`, `getValue`, `getValues`,`setFetchLookup` cho từng dòng.
+  - ** Hỗ trợ đầy đủ các thao tác `show, hide` cho từng nút grid.
 - 🎨 **Giao diện trực quan:** Tối ưu hóa trải nghiệm nhập liệu, dễ dàng thao tác và cấu hình.
 
 ---
@@ -25,6 +27,7 @@
 Tạo một bản ghi cấu hình trong bảng `ctt_editgridconfiguration` với thông tin chi tiết như sau:
 
 * **Grid Code:** Phải trùng khớp hoàn toàn với mã *Custom Parameter* đã gắn ở Bước 1.
+* **Label Grid:** Là tên hiển thị của grid.
 
 #### 📊 Chi tiết thông số cấu hình cấu trúc Grid:
 
@@ -97,6 +100,24 @@ BiSDK.Grid(gridName).Parent.getAttribute(attribute).Loaded((loaded: boolean) => 
             "</fetch>"
         ].join("");
         BiSDK.Grid(gridName).Parent.getAttribute(attribute).setFetchLookup(fetchXml,target);
+
+        //Show button new
+        BiSDK.Grid(gridName).Button.Add.show();
+
+        //Hide button new
+        BiSDK.Grid(gridName).Button.Add.hide();
+
+        //Show button delete
+        BiSDK.Grid(gridName).Button.Delete.show();
+
+        //Hide button delete
+        BiSDK.Grid(gridName).Button.Delete.hide();
+
+        //Show button save
+        BiSDK.Grid(gridName).Button.Save.show(rs.target);
+
+        //Hide button save
+        BiSDK.Grid(gridName).Button.Save.hide(rs.target);
     }
 });
 ```
@@ -121,19 +142,25 @@ results = {
 ## 💡 Ví dụ thực tế (Trường hợp nâng cao)
 
 **Kịch bản:** Khi lưới `acc_contact` tải xong, chúng ta cần:
-1. Đọc cột `statecode` để kiểm tra: Nếu giá trị bằng `1` thì mở khóa (Enable) cột `fullname`, ngược lại thì khóa (Disable).
+1. Đọc cột `statecode` để kiểm tra: Nếu giá trị bằng `1` thì show button `save`, ngược lại thì hide.
 2. Lắng nghe sự kiện thay đổi (`addOnChange`) của cột `statecode`: Nếu giá trị khác `1` thì khóa cột `fullname`, ngược lại thì mở khóa.
+3. Kiểm tra nếu user có role là admin thì mới hiển thị button delete, ngược lại thì hide.
 
 ```javascript
 const grid = BiSDK.Grid("acc_contact");
 
-grid.Loaded((loaded) => {
+grid.Loaded(async (loaded) => {
     if (!loaded) return;
 
-    // 1. Kiểm tra điều kiện khóa/mở khóa trường khi Grid vừa tải xong
+    // 1. Kiểm tra điều kiện show/hide button save
     grid.Parent.getAttribute("statecode").getValues((rs) => {
-        const isStateActive = (rs.value?.value === 1);
-        grid.Parent.getAttribute("fullname").setDisabled(!isStateActive, rs.target);
+        const isNew = (rs.value?.value === 1);]
+        if(isNew){
+            grid.Button.Save.show(rs.target);
+        }
+        else{
+            grid.Button.Save.hide(rs.target);
+        }
     });
 
     // 2. Bắt sự kiện OnChange để thay đổi thuộc tính động khi người dùng thao tác
@@ -142,5 +169,14 @@ grid.Loaded((loaded) => {
         
         grid.Parent.getAttribute("fullname").setDisabled(!isStateActive, rs.target);
     });
+
+    // 3. Check role là admin show/hide button delete
+    const roleAdmin = await getRoleAdmin();
+    if(roleAdmin){
+        grid.Button.Delete.show();
+    }
+    else{
+        grid.Button.Delete.hide();
+    }
 });
 ```
