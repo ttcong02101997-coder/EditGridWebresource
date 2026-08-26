@@ -119,10 +119,10 @@ BiSDK.Grid(gridName).Parent.getAttribute(attribute).Loaded((loaded: boolean) => 
         //Hide button delete
         BiSDK.Grid(gridName).Button.Delete.hide();
 
-        //Show button save
+        //Show button save cho từng row
         BiSDK.Grid(gridName).Parent.Button.Save.show(rs.target);
 
-        //Hide button save
+        //Hide button save cho từng row
         BiSDK.Grid(gridName).Parent.Button.Save.hide(rs.target);
     }
 });
