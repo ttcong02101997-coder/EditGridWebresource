@@ -114,10 +114,10 @@ BiSDK.Grid(gridName).Parent.getAttribute(attribute).Loaded((loaded: boolean) => 
         BiSDK.Grid(gridName).Button.Delete.hide();
 
         //Show button save
-        BiSDK.Grid(gridName).Button.Save.show(rs.target);
+        BiSDK.Grid(gridName).Parent.Button.Save.show(rs.target);
 
         //Hide button save
-        BiSDK.Grid(gridName).Button.Save.hide(rs.target);
+        BiSDK.Grid(gridName).Parent.Button.Save.hide(rs.target);
     }
 });
 ```
