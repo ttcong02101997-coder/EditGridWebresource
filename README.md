@@ -9,8 +9,8 @@
 - 📝 **Edit Grid Parent:** Chỉnh sửa dữ liệu trực tiếp trên lưới cấp cha.
 - 🌿 **Edit Grid Child:** Hỗ trợ mở rộng và chỉnh sửa lưới cấp con độc lập.
 - ⚙️ Bộ hàm SDK mạnh mẽ:
-  - Hỗ trợ đầy đủ các thao tác `setValue`, `setDisabled`, `setRequired`, `addOnChange`, `getValue`, `getValues`,`setFetchLookup`,`show/hide button save` cho từng dòng.
-  - Hỗ trợ đầy đủ các thao tác `show, hide` cho nút `new, delete`.
+  - Hỗ trợ đầy đủ các thao tác `setValue`, `setDisabled`, `setRequired`, `addOnChange`, `getValue`, `getValues`,`setFetchLookup`,`setBackgroudColor`,`show/hide button save` cho từng dòng.
+  - Hỗ trợ đầy đủ các thao tác `show, hide` cho nút `new, delete, save`.
 - 🎨 **Giao diện trực quan:** Tối ưu hóa trải nghiệm nhập liệu, dễ dàng thao tác và cấu hình.
 
 ---
@@ -124,6 +124,9 @@ BiSDK.Grid(gridName).Parent.getAttribute(attribute).Loaded((loaded: boolean) => 
 
         //Hide button save cho từng row
         BiSDK.Grid(gridName).Parent.Button.Save.hide(rs.target);
+
+        //Set background color cho từng row
+        BiSDK.Grid(gridName).Parent.UI.setBackgroudColor(rs.target);
     }
 });
 ```
