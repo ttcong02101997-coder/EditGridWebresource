@@ -107,6 +107,12 @@ BiSDK.Grid(gridName).Parent.getAttribute(attribute).Loaded((loaded: boolean) => 
         //Hide button new
         BiSDK.Grid(gridName).Button.Add.hide();
 
+        //Show button save
+        BiSDK.Grid(gridName).Button.Save.show();
+
+        //Hide button save
+        BiSDK.Grid(gridName).Button.Save.hide();
+
         //Show button delete
         BiSDK.Grid(gridName).Button.Delete.show();
 
