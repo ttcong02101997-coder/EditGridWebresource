@@ -9,8 +9,8 @@
 - 📝 **Edit Grid Parent:** Chỉnh sửa dữ liệu trực tiếp trên lưới cấp cha.
 - 🌿 **Edit Grid Child:** Hỗ trợ mở rộng và chỉnh sửa lưới cấp con độc lập.
 - ⚙️ Bộ hàm SDK mạnh mẽ:
-  - Hỗ trợ đầy đủ các thao tác `setValue`, `setDisabled`, `setRequired`, `addOnChange`, `getValue`, `getValues`,`setFetchLookup` cho từng dòng.
-  - Hỗ trợ đầy đủ các thao tác `show, hide` cho từng nút grid.
+  - Hỗ trợ đầy đủ các thao tác `setValue`, `setDisabled`, `setRequired`, `addOnChange`, `getValue`, `getValues`,`setFetchLookup`,`show/hide button save` cho từng dòng.
+  - Hỗ trợ đầy đủ các thao tác `show, hide` cho nút `new, delete`.
 - 🎨 **Giao diện trực quan:** Tối ưu hóa trải nghiệm nhập liệu, dễ dàng thao tác và cấu hình.
 
 ---
@@ -154,7 +154,7 @@ grid.Loaded(async (loaded) => {
 
     // 1. Kiểm tra điều kiện show/hide button save
     grid.Parent.getAttribute("statecode").getValues((rs) => {
-        const isNew = (rs.value?.value === 1);]
+        const isNew = rs.value?.value;
         if(isNew){
             grid.Button.Save.show(rs.target);
         }
@@ -166,7 +166,6 @@ grid.Loaded(async (loaded) => {
     // 2. Bắt sự kiện OnChange để thay đổi thuộc tính động khi người dùng thao tác
     grid.Parent.getAttribute("statecode").addOnChange((rs) => {
         const isStateActive = (rs?.value?.value === 1);
-        
         grid.Parent.getAttribute("fullname").setDisabled(!isStateActive, rs.target);
     });
 
