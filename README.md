@@ -8,9 +8,9 @@
 
 - 📝 **Edit Grid Parent:** Chỉnh sửa dữ liệu trực tiếp trên lưới cấp cha.
 - 🌿 **Edit Grid Child:** Hỗ trợ mở rộng và chỉnh sửa lưới cấp con độc lập.
-- ⚙️ **Bộ hàm SDK mạnh mẽ:
-  - ** Hỗ trợ đầy đủ các thao tác `setValue`, `setDisabled`, `setRequired`, `addOnChange`, `getValue`, `getValues`,`setFetchLookup` cho từng dòng.
-  - ** Hỗ trợ đầy đủ các thao tác `show, hide` cho từng nút grid.
+- ⚙️ Bộ hàm SDK mạnh mẽ:
+  - Hỗ trợ đầy đủ các thao tác `setValue`, `setDisabled`, `setRequired`, `addOnChange`, `getValue`, `getValues`,`setFetchLookup` cho từng dòng.
+  - Hỗ trợ đầy đủ các thao tác `show, hide` cho từng nút grid.
 - 🎨 **Giao diện trực quan:** Tối ưu hóa trải nghiệm nhập liệu, dễ dàng thao tác và cấu hình.
 
 ---
