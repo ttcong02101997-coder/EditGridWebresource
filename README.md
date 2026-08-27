@@ -65,6 +65,10 @@ Luôn đặt các logic tùy biến bên trong sự kiện `Loaded` để đảm
 
 ```javascript
 // Kiểm tra trạng thái tải của webresource
+const wrCtrl = formContext.getControl("WebResource_editGrid");
+const wrWindow = await wrCtrl.getContentWindow();
+const BiSDK = wrWindow.BiSDK;
+
 BiSDK.Grid(gridName).Parent.getAttribute(attribute).Loaded((loaded: boolean) => {
     if (loaded) {
         // Webresource đã được tải, viết các hàm xử lý dữ liệu tại đây
@@ -156,6 +160,9 @@ results = {
 3. Kiểm tra nếu user có role là admin thì mới hiển thị button delete, ngược lại thì hide.
 
 ```javascript
+const wrCtrl = formContext.getControl("WebResource_editGrid");
+const wrWindow = await wrCtrl.getContentWindow();
+const BiSDK = wrWindow.BiSDK;
 const grid = BiSDK.Grid("acc_contact");
 
 grid.Loaded(async (loaded) => {
