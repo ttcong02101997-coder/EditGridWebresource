@@ -54,6 +54,7 @@ Nếu không có logic đặc biệt, hệ thống sẽ tự động chạy sau 
 Trường hợp cần can thiệp logic động (Ràng buộc dữ liệu, Đóng/Mở khóa trường), bạn hãy sử dụng bộ công cụ **BiSDK** đi kèm:
 
 ### 📐 Định nghĩa các biến và đối tượng chính
+- `TenWebresource`: Webresource name.
 - `gridName`: Mã cấu hình Grid (gắn ở tham số Webresource).
 - `attribute`: Tên logic của trường dữ liệu cần xử lý.
 - `Parent`: Thao tác trên Grid cấp cha.
@@ -65,7 +66,7 @@ Luôn đặt các logic tùy biến bên trong sự kiện `Loaded` để đảm
 
 ```javascript
 // Kiểm tra trạng thái tải của webresource
-const wrCtrl = formContext.getControl("WebResource_editGrid");
+const wrCtrl = formContext.getControl(TenWebresource);
 const wrWindow = await wrCtrl.getContentWindow();
 const BiSDK = wrWindow.BiSDK;
 
