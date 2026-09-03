@@ -9,8 +9,10 @@
 - 📝 **Edit Grid Parent:** Chỉnh sửa dữ liệu trực tiếp trên lưới cấp cha.
 - 🌿 **Edit Grid Child:** Hỗ trợ mở rộng và chỉnh sửa lưới cấp con độc lập.
 - ⚙️ Bộ hàm SDK mạnh mẽ:
-  - Hỗ trợ đầy đủ các thao tác `setValue`, `setDisabled`, `setRequired`, `addOnChange`, `getValue`, `getValues`,`setFetchLookup`,`setBackgroudColor`,`show/hide button save` cho từng dòng.
+  - Hỗ trợ đầy đủ các thao tác `setValue`, `setDisabled`, `setRequired`, `addOnChange`, `getValue`, `getValues`,`setFetchLookup`,`setBackgroudColor`,`setDisabledRow`,`setDisabledAll`,`show/hide button save` cho từng dòng.
   - Hỗ trợ đầy đủ các thao tác `show, hide` cho nút `new, delete, save`.
+  - Hỗ trợ thêm nút cho grid.
+  - Và các chức năng, tiện ích khác.
 - 🎨 **Giao diện trực quan:** Tối ưu hóa trải nghiệm nhập liệu, dễ dàng thao tác và cấu hình.
 
 ---
@@ -56,9 +58,9 @@ Trường hợp cần can thiệp logic động (Ràng buộc dữ liệu, Đón
 ### 📐 Định nghĩa các biến và đối tượng chính
 - `TenWebresource`: Webresource name.
 - `gridName`: Mã cấu hình Grid (gắn ở tham số Webresource).
-- `attribute`: Tên logic của trường dữ liệu cần xử lý.
 - `Parent`: Thao tác trên Grid cấp cha.
 - `Child`: Thao tác trên Grid cấp con.
+- `attribute`: Tên logic của trường dữ liệu cần xử lý.
 
 ### 🔌 Đăng ký sự kiện khởi tạo hệ thống (Onload)
 
@@ -107,10 +109,10 @@ BiSDK.Grid(gridName).Parent.getAttribute(attribute).Loaded((loaded: boolean) => 
         BiSDK.Grid(gridName).Parent.getAttribute(attribute).setFetchLookup(fetchXml,target);
 
         //Show button new
-        BiSDK.Grid(gridName).Button.Add.show();
+        BiSDK.Grid(gridName).Button.New.show();
 
         //Hide button new
-        BiSDK.Grid(gridName).Button.Add.hide();
+        BiSDK.Grid(gridName).Button.New.hide();
 
         //Show button save
         BiSDK.Grid(gridName).Button.Save.show();
@@ -132,6 +134,21 @@ BiSDK.Grid(gridName).Parent.getAttribute(attribute).Loaded((loaded: boolean) => 
 
         //Set background color cho từng row
         BiSDK.Grid(gridName).Parent.UI.setBackgroudColor(rs.target);
+
+        //Set disabled cho từng row
+        BiSDK.Grid(gridName).Parent.setDisabledRow(rs.target);
+
+        //Set disabled cho từng tất cả grid
+        BiSDK.Grid(gridName).setDisabledAll();
+
+        //Add nút cho grid
+        BiSDK.Grid(gridName).Button.Add({
+          buttonName:"",
+          onClick:()=>{}
+        })
+
+        //Get selected records
+        BiSDK.Grid(gridName).getSelectedRecords();
     }
 });
 ```
